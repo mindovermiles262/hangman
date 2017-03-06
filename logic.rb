@@ -5,6 +5,7 @@
 
 # Requires display.rb to show hangman noose ASCII drawings.
 require './display'
+require 'yaml'
 
 class Logic
     def initialize
@@ -32,6 +33,11 @@ class Logic
         Logic.show
     end
 
+    # Override class vars if loading from save
+    def load_yaml
+        # do something
+    end
+
     # Checks player guess is 1 letter. Returns true if new guess needed
     def self.check(guess)
         # check letter
@@ -41,6 +47,12 @@ class Logic
         elsif @@guessed.include?(guess) || @@show.include?(guess)
             puts "\nYou already guessed that letter. Try again\n\n"
             return true
+        elsif guess == "SAVE"
+            #YAML Save @@master, @@show, @@guessed
+            save_file = [@@master, @@show, @@guessed]
+            puts save_file
+            yaml::dump(save_file)
+
         # letter passes check
         else
             Logic.match(guess)
@@ -78,6 +90,8 @@ class Logic
         else
             system('clear')
             Display.new(6)
+            puts "#{@@show.join(" ")}"
+            puts "The correct answer was #{@@master}"
             exit
         end
     end

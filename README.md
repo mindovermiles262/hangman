@@ -1,7 +1,12 @@
 #Hangman
-Description.... [link](http://link_to_project)
+Hangman is a word game where one player thinks of a word or phrase and represents all the letters by dashes. It is then player 2's objective to guess the correct letters in the word or phrase within a certain number of guesses.  Player two wins if they can successfully decode the message before they run out of tries.
+
+This project is part of [The Odin Project's] Ruby Curriculum. More information can be found [here](http://www.theodinproject.com/courses/ruby-programming/lessons/file-i-o-and-serialization)
 
 ##Use
+Download and extract all files. Then run `ruby main.rb` from your terminal to begin.
+
+Alternativly, an online version can be found [here](website)
 
 ##Development Languages
 * Ruby v2.0
