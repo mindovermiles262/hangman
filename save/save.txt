@@ -1,0 +1,3 @@
+Most recent saved game will appear in this folder as `game` with no extension.
+
+Do not delete this file. It is a placeholder for version control.
