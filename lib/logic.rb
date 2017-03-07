@@ -5,7 +5,7 @@
 
 # Requires display.rb to show hangman noose ASCII drawings. 
 # Requires PStore to save and load saved games
-require './display'
+require './lib/display'
 require 'pstore'
 
 class Logic
@@ -24,7 +24,7 @@ class Logic
         end
 
         # Set master to random word in dictionary
-        @@master = dict[rand(1..dict.length)].to_s
+        @@master = dict[rand(1..dict.length)].to_s.upcase
 
         # Set var @@show (dashes string)
         @@master.length.times do

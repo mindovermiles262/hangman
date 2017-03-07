@@ -1,5 +1,5 @@
-require './logic'
-require './player'
+require './lib/logic'
+require './lib/player'
 
 class Hangman
     def initialize
