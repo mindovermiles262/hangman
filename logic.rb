@@ -3,9 +3,10 @@
 # randomly assigns one word to @@master. Creates @@show, and checks player
 # input is valid.
 
-# Requires display.rb to show hangman noose ASCII drawings.
+# Requires display.rb to show hangman noose ASCII drawings. 
+# Requires PStore to save and load saved games
 require './display'
-require 'yaml'
+require 'pstore'
 
 class Logic
     def initialize
@@ -14,10 +15,10 @@ class Logic
         @@show = []
         @@guessed = []
 
-        # Create Dictionary with words between 4 and 16 chars
+        # Create Dictionary with words between 5 and 12 chars
         dict = []
         File.open("dictionary.txt").each do |line|
-            if line.strip.length.between?(4, 16)
+            if line.strip.length.between?(5, 12)
                 dict.push(line.strip)
             end
         end
@@ -26,37 +27,52 @@ class Logic
         @@master = dict[rand(1..dict.length)].to_s
         @@master = "FOOBAR" # DEBUG: Clear for real game
 
-        # Set @@show to master.length
+        # Set var @@show (dashes string)
         @@master.length.times do
             @@show << "_"
         end
         Logic.show
     end
 
-    # Override class vars if loading from save
-    def load_yaml
-        # do something
+    # Load saved game
+    def self.load_saved_game
+        unless File.exist?("./save/game")
+            puts "No Saved Games Found"
+            puts "Starting New Game"
+            return true
+        end
+        save = PStore.new("./save/game")
+        save.transaction do
+            @@master = save[:m]
+            @@show = save[:s]
+            @@guessed = save[:g]
+        end
+        Logic.show
     end
 
-    # Checks player guess is 1 letter. Returns true if new guess needed
+    # Checks if player guess "save". If not, checks guess is 1 letter. 
+    # Returns true (to main.rb) if new guess needed
     def self.check(guess)
-        # check letter
-        if guess.length != 1 || !(guess =~ /[A-Z]/)
+        # save game
+        if guess == "SAVE"
+            save = PStore.new("./save/game")
+            save.transaction do
+                save[:m] = @@master
+                save[:s] = @@show
+                save[:g] = @@guessed
+            end
+            puts "Gave Saved"
+            exit
+        # check letter is valid
+        elsif guess.length != 1 || !(guess =~ /[A-Z]/)
             puts "\nInvalid Letter\n\n"
             return true
+        # check letter already guessed
         elsif @@guessed.include?(guess) || @@show.include?(guess)
             puts "\nYou already guessed that letter. Try again\n\n"
             return true
-        elsif guess == "SAVE"
-            #YAML Save @@master, @@show, @@guessed
-            save_file = [@@master, @@show, @@guessed]
-            puts save_file
-            yaml::dump(save_file)
-
-        # letter passes check
-        else
-            Logic.match(guess)
         end
+        Logic.match(guess)
     end   
 
     # MAIN LOOP of program. Compares player guess char to master then updates 
@@ -73,6 +89,7 @@ class Logic
         end
         # check for win
         if @@show.join("") == @@master
+            puts "#{@@show.join(" ")}"
             puts "You win!"
         # no win
         elsif @@guessed.length < 5
@@ -99,10 +116,6 @@ class Logic
     # display noose, @@show as string, guessed letters, remaining guesses
     def self.show
         Display.new((@@guessed.length))
-        noshow
-    end
-    # noshow used for invalid inputs
-    def self.noshow
         puts "\n\n#{@@show.join(" ")} (#{@@master.length} letters)"
         puts "Incorrect: #{@@guessed.join(" ")}"
         puts "Guesses Remaining: #{6 - @@guessed.length}"
