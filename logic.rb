@@ -25,7 +25,6 @@ class Logic
 
         # Set master to random word in dictionary
         @@master = dict[rand(1..dict.length)].to_s
-        @@master = "FOOBAR" # DEBUG: Clear for real game
 
         # Set var @@show (dashes string)
         @@master.length.times do
