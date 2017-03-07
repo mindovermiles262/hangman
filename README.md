@@ -4,7 +4,7 @@ Hangman is a word game where one player thinks of a word or phrase and represent
 This project is part of [The Odin Project's](http://www.theodinproject.com) Ruby Curriculum. More information can be found [here](http://www.theodinproject.com/courses/ruby-programming/lessons/file-i-o-and-serialization)
 
 ##Use
-Download and extract all files. Then run `ruby main.rb` from your terminal to begin. Saved files are stored in "./save/game". All words are loaded from `dictionary.txt` and are between 5 and 12 characters long.
+Download and extract all files. Then run `ruby main.rb` from your terminal to begin. Saved files are stored in `./save/game`. All words are loaded from `dictionary.txt` and are between 5 and 12 characters long.
 
 ##Development Languages
 * Ruby v2.0
