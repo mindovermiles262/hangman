@@ -1,20 +1,22 @@
-#Hangman
+# Hangman
+
 Hangman is a word game where one player thinks of a word or phrase and represents all the letters by dashes. It is then player 2's objective to guess the correct letters in the word or phrase within a certain number of guesses.  Player two wins if they can successfully decode the message before they run out of tries.
 
 This project is part of [The Odin Project's](http://www.theodinproject.com) Ruby Curriculum. More information can be found [here](http://www.theodinproject.com/courses/ruby-programming/lessons/file-i-o-and-serialization)
 
-##Use
+## Use
+
 Download and extract all files. Then run `ruby main.rb` from your terminal to begin. Saved files are stored in `./save/game`. All words are loaded from `dictionary.txt` and are between 5 and 12 characters long.
 
-##Development Languages
+## Development Languages
 * Ruby v2.0
 
-##TODO
+## TODO
 1. ~~Save Data~~
 2. Add play again
 3. ~~Finish README~~
 
-##Contributing
+## Contributing
 Please follow a "fork-and-pull" workflow when Contributing
 
 1. Fork the repo on GitHub
@@ -23,7 +25,7 @@ Please follow a "fork-and-pull" workflow when Contributing
 4. Push your work back up to your fork
 5. Submit a Pull request so that we can review your changes
 
-##Copyright Notice
+## Copyright Notice
 Copyright 2017 Andy Duss
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
